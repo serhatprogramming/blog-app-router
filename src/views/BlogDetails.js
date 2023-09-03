@@ -1,7 +1,6 @@
-import Blog from "../components/Blog";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const BlogList = () => {
+const BlogDetails = () => {
   const blogs = [
     {
       id: 1,
@@ -34,20 +33,17 @@ const BlogList = () => {
     },
   ];
 
+  const id = useParams().id;
+  const blog = blogs.find((blog) => blog.id === Number(id));
+
   return (
     <div>
-      <h3>Blogs</h3>
-      <ul>
-        {blogs.map((blog) => (
-          <li key={blog.id}>
-            <Link to={`/blog/${blog.id}`}>
-              <Blog blog={blog} />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <h3>{blog.title}</h3>
+      <div>{blog.content}</div>
+      <div>By {blog.author}</div>
+      <div>Likes: {blog.likes}</div>
     </div>
   );
 };
 
-export default BlogList;
+export default BlogDetails;
