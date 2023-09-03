@@ -1,9 +1,15 @@
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+
+const Login = ({ toggleLogin }) => {
+  const navigate = useNavigate();
+
   const handleLogin = (event) => {
     event.preventDefault();
     console.log("login successful");
     event.target.username.value = "";
     event.target.password.value = "";
+    toggleLogin();
+    navigate("/");
   };
 
   return (

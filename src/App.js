@@ -5,8 +5,15 @@ import About from "./views/About";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import BlogDetails from "./views/BlogDetails";
 import UserDetails from "./views/UserDetails";
+import { useState } from "react";
 
 const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const toggleLogin = () => {
+    setLoggedIn(!loggedIn);
+  };
+
   const menuStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -19,13 +26,17 @@ const App = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/users">Users</Link>
-          <Link to="/login">Login</Link>
+          {loggedIn && <button onClick={toggleLogin}>Logout</button>}
         </div>
         <h2>Welcome to Blog Application</h2>
         <Routes>
-          <Route path="/" element={<BlogList />} />
+          <Route
+            path="/"
+            element={
+              loggedIn ? <BlogList /> : <Login toggleLogin={toggleLogin} />
+            }
+          />
           <Route path="/users" element={<UserList />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/user/:id" element={<UserDetails />} />
