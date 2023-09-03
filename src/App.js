@@ -4,6 +4,7 @@ import Login from "./views/Login";
 import About from "./views/About";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import BlogDetails from "./views/BlogDetails";
+import UserDetails from "./views/UserDetails";
 
 const App = () => {
   const menuStyle = {
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/user/:id" element={<UserDetails />} />
         </Routes>
       </div>
     </Router>

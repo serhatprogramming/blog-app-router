@@ -1,7 +1,6 @@
-import User from "../components/User";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const UserList = () => {
+const UserDetails = () => {
   const users = [
     {
       id: 1,
@@ -35,16 +34,21 @@ const UserList = () => {
     },
   ];
 
+  const id = useParams().id;
+  const user = users.find((user) => user.id === Number(id));
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <div>
-      <h3>Users</h3>
-      {users.map((user) => (
-        <Link to={`/user/${user.id}`} key={user.id}>
-          <User user={user} />
-        </Link>
-      ))}
+      <h2>User details</h2>
+      <div>Name: {user.name}</div>
+      <div>Username: {user.username}</div>
+      <div>Number of Blogs: {user.numberOfBlogs}</div>
     </div>
   );
 };
 
-export default UserList;
+export default UserDetails;
